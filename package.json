@@ -1,0 +1,85 @@
+{
+  "name": "jwt_vscode",
+  "displayName": "JWT",
+  "description": "Visual studio code extension to decode, verify and generate JWT",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.64.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:jwt.jwtDecode",
+    "onCommand:jwt.jwtEncode",
+    "onCommand:jwt.editor"
+  ],
+  "browser": "./dist/web/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "category": "JWT",
+        "command": "jwt.jwtDecode",
+        "title": "Decode"
+      },
+      {
+        "category": "JWT",
+        "icon": "JWT",
+        "shortTitle": "JWT Encode",
+        "command": "jwt.jwtEncode",
+        "title": "Encode"
+      },
+      {
+        "category": "JWT",
+        "command": "jwt.editor",
+        "title": "Editor"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "jwt.jwtDecode",
+        "key": "ctrl+shift+d",
+        "mac": "cmd+shift+d",
+        "when": "editorHasSelection"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "jwt.jwtDecode",
+          "when": "editorHasSelection"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "test": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. --extensionTestsPath=dist/web/test/suite/index.js",
+    "pretest": "npm run compile-web",
+    "vscode:prepublish": "npm run package-web",
+    "compile-web": "webpack",
+    "watch-web": "webpack --watch",
+    "package-web": "webpack --mode production --devtool hidden-source-map",
+    "lint": "eslint src --ext ts",
+    "run-in-browser": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. ."
+  },
+  "devDependencies": {
+    "@types/mocha": "^9.1.0",
+    "@types/vscode": "^1.64.0",
+    "@types/webpack-env": "^1.16.3",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "@vscode/test-web": "^0.0.22",
+    "assert": "^2.0.0",
+    "eslint": "^8.9.0",
+    "mocha": "^9.2.1",
+    "process": "^0.11.10",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "@vscode/webview-ui-toolkit": "^0.9.1",
+    "jwt-decode": "^3.1.2"
+  }
+}
